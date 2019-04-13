@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.util.Scanner;
 public class TransferTool{
 
   public static void collegeList(){
@@ -21,11 +22,11 @@ public class TransferTool{
   }
 
 
-
-
-
-
   public static void main(String[] args) {
-    collegeList();
+    Scanner scan = new Scanner(System.in);
+    System.out.println("Enter your GPA: ");
+    double gpa = scan.nextDouble();
+    scan.close();
+    printList(gpa);
   }
 }
