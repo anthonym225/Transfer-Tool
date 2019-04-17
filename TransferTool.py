@@ -8,9 +8,20 @@ ColList = pd.DataFrame({"College": ["Princeton University", "Harvard University"
                "Type": ["Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Private not-for-profit", "Public", "Public", "Public", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Private not-for-profit", "Public", "Public", "Private not-for-profit"],
                "Average Financial Aid": [44128, 48195, 46127, 41674, 39032, 48126, 47782, 47055, 43856, 38083, 38593, 36632, 45867, 40116, 40382, 35445, 36192, 38080, 19693, 38927, 38254, 40346, 18541, 34145, 30614, 19017, 37747, 16865, 40596, 32505, 20774, 17758, 18506, 31194, 33806, 11835, 6379, 38399, 17928, 18523, 17303, 34255, 28253, 38906, 45405, 40356, 14351, 12921, 42575, 11021, 6461, 29321]})
 
-# c = ColList.style.format({'Transfer Rate': '{:.2%}'.format})
+# c = ColList.style.format({'Transfer Rate': '{:.2%}'.format}) Delete later
 pd.options.display.float_format = '{:,.2f}%'.format
+gpaT = input("Enter your cumulative college GPA: ")
+gpa = float(gpaT)
+state = input("Enter the state you are a resident of: ")
 
-print(ColList[(ColList['Transfer Rate'] <= 2.00) & (ColList['Cost (OOS + R&B)'] < 70000)])
-
-# How To Print Specific Columns ---> print(ColList[(ColList['Transfer Rate'] <= '2.0') & (ColList['College'] != 'Princeton University')])
+if gpa > 3.95:
+    print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00)]))
+    print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state)]))
+elif gpa > 3.80 and gpa < 3.95:
+    print(ColList[(ColList['Transfer Rate'] >= 5.00)])
+    print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state) & (ColList['Transfer Rate'] >= 5.00)]))
+elif gpa > 3.50 and gpa < 3.80:
+    print(ColList[(ColList['Transfer Rate'] >= 30.00)])
+    print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state) & (ColList['Transfer Rate'] >= 30.00)]))
+# print(ColList[(ColList['Transfer Rate'] <= 2.00) & (ColList['Cost (OOS + R&B)'] < 70000)])
+# How To Print Specific Columns --> print(ColList[(ColList['Transfer Rate'] <= '2.0') & (ColList['College'] != 'Princeton University')])
