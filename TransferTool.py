@@ -5,7 +5,7 @@ ColList = pd.DataFrame({"College": ["Princeton University", "Harvard University"
                "Transfers Accepted": [13, 16, 170, 24, 48, 31, 31, 80, 221, 113, 282, 3, 4, 95, 404, 852, 54, 235, 5720, 228, 256, 346, 4316, 2143, 57, 1028, 109, 1571, 92, 2014, 9261, 1218, 10309, 308, 188, 721, 2954, 230, 385, 10317, 9682, 2044, 114, 920, 305, 214, 1848, 2263, 223, 3012, 1996, 278],
                "State": ["New Jersey", "Massachusetts", "New York", "Massachusetts", "Illinois", "Connecticut", "California", "North Carolina", "Pennsylvania", "Maryland", "Illinois", "California", "New Hampshire", "Rhode Island", "Tennessee", "New York", "Texas", "Indiana", "California", "Missouri", "Georgia", "District of Columbia", "California", "California", "Pennsylvania", "Virginia", "Massachusetts", "Michigan", "North Carolina", "New York", "California", "North Carolina", "California", "New York", "Massachusetts", "Georgia", "Florida", "Massachusetts", "Virginia", "California", "California", "Massachusetts", "Ohio", "Massachusetts", "Louisiana", "California", "Georgia", "Illinois", "New York", "Texas", "Wisconsin", "Pennsylvania"],
                "Cost (OOS + R&B)": [66150, 69600, 74199, 67430, 75735, 71290, 69109, 71764, 71715, 69863, 72980, 68901, 71827, 71050, 67392, 70321, 63158, 69395, 61915, 71975, 66950, 71580, 65003, 72209, 70094, 62633, 70600, 62176, 69130, 71790, 64125, 51152, 61872, 70108, 70943, 49366, 43409, 70588, 59012, 63743, 60177, 70302, 65384, 71067, 73296, 73002, 44394, 46202, 73813, 51786, 49885, 68231],
-               "Type": ["Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Private not-for-profit", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Public", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Private not-for-profit", "Public", "Public", "Public", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Private not-for-profit", "Public", "Public", "Private not-for-profit", "Public", "Public", "Private not-for-profit"],
+               "Type": ["Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Public", "Private", "Private", "Private", "Public", "Private", "Private", "Public", "Private", "Public", "Private", "Private", "Public", "Public", "Public", "Private", "Private", "Public", "Public", "Private", "Public", "Public", "Public", "Private", "Private", "Private", "Private", "Private", "Public", "Public", "Private", "Public", "Public", "Private"],
                "Average Financial Aid": [44128, 48195, 46127, 41674, 39032, 48126, 47782, 47055, 43856, 38083, 38593, 36632, 45867, 40116, 40382, 35445, 36192, 38080, 19693, 38927, 38254, 40346, 18541, 34145, 30614, 19017, 37747, 16865, 40596, 32505, 20774, 17758, 18506, 31194, 33806, 11835, 6379, 38399, 17928, 18523, 17303, 34255, 28253, 38906, 45405, 40356, 14351, 12921, 42575, 11021, 6461, 29321]})
 
 # c = ColList.style.format({'Transfer Rate': '{:.2%}'.format}) Delete later
@@ -13,15 +13,26 @@ pd.options.display.float_format = '{:,.2f}%'.format
 gpaT = input("Enter your cumulative college GPA: ")
 gpa = float(gpaT)
 state = input("Enter the state you are a resident of: ")
+type = input("Enter if you would like Public, Private, or both: ")
 
 if gpa > 3.95:
-    print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00)]))
+    if type == "both":
+        print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00)]))
+    else:
+        print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00) & (ColList['Type'] == type)]))
     print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state)]))
 elif gpa > 3.80 and gpa < 3.95:
-    print(ColList[(ColList['Transfer Rate'] >= 5.00)])
+    if type == "both":
+        print(ColList[(ColList['Transfer Rate'] >= 5.00)])
+    else:
+        print(ColList[(ColList['Transfer Rate'] >= 5.00) & (ColList['Type'] == type)])
     print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state) & (ColList['Transfer Rate'] >= 5.00)]))
 elif gpa > 3.50 and gpa < 3.80:
-    print(ColList[(ColList['Transfer Rate'] >= 30.00)])
+    if type == "both":
+        print(ColList[(ColList['Transfer Rate'] >= 30.00)])
+    else:
+        print(ColList[(ColList['Transfer Rate'] >= 30.00) & (ColList['Type'] == type)])
     print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state) & (ColList['Transfer Rate'] >= 30.00)]))
+
 # print(ColList[(ColList['Transfer Rate'] <= 2.00) & (ColList['Cost (OOS + R&B)'] < 70000)])
 # How To Print Specific Columns --> print(ColList[(ColList['Transfer Rate'] <= '2.0') & (ColList['College'] != 'Princeton University')])
