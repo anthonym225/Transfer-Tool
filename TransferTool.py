@@ -12,22 +12,22 @@ ColList = pd.DataFrame({"College": ["Princeton University", "Harvard University"
 # c = ColList.style.format({'Transfer Rate': '{:.2%}'.format}) Delete later
 
 
-def inputs(gpa, state, type):
+def FilterFrame(gpa, state, type):
 
     if gpa > 3.95:
-        if type == "both":
+        if type == "Both":
             print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00)]))
         else:
             print("At this point, if you have over a year of college coursework, you have as best a chance as any at getting into any of these universities. Please understand that the extremely selective universities on this list will be a reach for anyone.\n {}".format(ColList[(ColList['Transfer Rate'] >= 0.00) & (ColList['Type'] == type)]))
         print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state)]))
     elif gpa > 3.80 and gpa < 3.95:
-        if type == "both":
+        if type == "Both":
             print(ColList[(ColList['Transfer Rate'] >= 5.00)])
         else:
             print(ColList[(ColList['Transfer Rate'] >= 5.00) & (ColList['Type'] == type)])
         print("Strongly consider these in-state universities!\n {}".format(ColList[(ColList['State'] == state) & (ColList['Transfer Rate'] >= 5.00)]))
     elif gpa > 3.50 and gpa < 3.80:
-        if type == "both":
+        if type == "Both":
             print(ColList[(ColList['Transfer Rate'] >= 30.00)])
         else:
             print(ColList[(ColList['Transfer Rate'] >= 30.00) & (ColList['Type'] == type)])
@@ -37,10 +37,10 @@ def inputs(gpa, state, type):
 if __name__ == "__main__":
     gpaT = input("Enter your cumulative college GPA: ")
     gpa = float(gpaT)
-    state = input("Enter the state you are a resident of: ")
-    type = input("Enter if you would like Public, Private, or both: ")
+    state = input("Enter the state you are a resident of: ").lower().title()
+    type = input("Enter if you would like Public, Private, or Both: ").lower().title()
 
-    pd.options.display.float_format = '{:,.2f}%'.format
-    inputs(gpa, state, type)
+    pd.options.display.float_format = '{:.2f}%'.format
+    FilterFrame(gpa, state, type)
 # print(ColList[(ColList['Transfer Rate'] <= 2.00) & (ColList['Cost (OOS + R&B)'] < 70000)])
 # How To Print Specific Columns --> print(ColList[(ColList['Transfer Rate'] <= '2.0') & (ColList['College'] != 'Princeton University')])
