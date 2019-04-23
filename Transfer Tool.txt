@@ -1,8 +1,8 @@
 TODO
-Take top transfer schools
-State? -
-College GPA -
-Start w/ instate.
-Print Colleges / Transfer Rates / Cost / Reach/Match/Safety?.
+Take top transfer schools √
+State? - √
+College GPA - √
+Start w/ instate √
+Print Colleges √ / Transfer Rates √ / Cost √ / Reach/Match/Safety?.
 Print pre reqs.
 Link transfer pages.
