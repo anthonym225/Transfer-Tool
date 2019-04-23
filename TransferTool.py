@@ -9,8 +9,6 @@ ColList = pd.DataFrame({"College": ["Princeton University", "Harvard University"
                "Type": ["Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Private", "Public", "Private", "Private", "Private", "Public", "Private", "Private", "Public", "Private", "Public", "Private", "Private", "Public", "Public", "Public", "Private", "Private", "Public", "Public", "Private", "Public", "Public", "Public", "Private", "Private", "Private", "Private", "Private", "Public", "Public", "Private", "Public", "Public", "Private"],
                "Average Financial Aid": [44128, 48195, 46127, 41674, 39032, 48126, 47782, 47055, 43856, 38083, 38593, 36632, 45867, 40116, 40382, 35445, 36192, 38080, 19693, 38927, 38254, 40346, 18541, 34145, 30614, 19017, 37747, 16865, 40596, 32505, 20774, 17758, 18506, 31194, 33806, 11835, 6379, 38399, 17928, 18523, 17303, 34255, 28253, 38906, 45405, 40356, 14351, 12921, 42575, 11021, 6461, 29321]})
 
-# c = ColList.style.format({'Transfer Rate': '{:.2%}'.format}) Delete later
-
 
 def FilterFrame(gpa, state, type):
 
