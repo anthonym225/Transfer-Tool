@@ -42,5 +42,6 @@ if __name__ == "__main__":
 
     pd.options.display.float_format = '{:.2f}%'.format
     FilterFrame(gpa, state, type)
+    print("Resources: \n - Admission and Financial Aid Data: https://bigfuture.collegeboard.org/ \n - Transfer Scholarships: https://www.careeronestop.org/toolkit/training/find-scholarships.aspx?keyword=transfer&sortcolumns=BestMatch&sortdirections= \n")
 # print(ColList[(ColList['Transfer Rate'] <= 2.00) & (ColList['Cost (OOS + R&B)'] < 70000)])
 # How To Print Specific Columns --> print(ColList[(ColList['Transfer Rate'] <= '2.0') & (ColList['College'] != 'Princeton University')])
